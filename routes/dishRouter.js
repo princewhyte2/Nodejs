@@ -25,4 +25,24 @@ dishRouter.route('/')
         res.end('Deleting all dishes');
     });
 
+dishRouter.route('/:dishId')
+    .all((req, res, next) => {
+        res.statusCode = 200;
+        res.setHeader('Content-Type', 'text/plain');
+        next();
+    })
+    .get((req, res, next) => {
+        res.end('Will send all the dishes with Id' + req.params.dishId + ' to you!');
+    })
+    .post((req, res, next) => {
+        res.end('Will add the dish: ' + req.body.name + ' with details: ' + req.body.description + ' to ' + req.params.dishId);
+    })
+    .put((req, res, next) => {
+        res.statusCode = 200;
+        res.end('PUT operation supported on /dishes ' + req.params.dishId);
+    })
+    .delete((req, res, next) => {
+        res.end('Deleting all dishes with id ' + req.params.dishId);
+    });
+
 module.exports = dishRouter;
